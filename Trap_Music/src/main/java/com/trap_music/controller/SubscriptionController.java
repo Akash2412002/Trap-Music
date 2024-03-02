@@ -1,6 +1,7 @@
 package com.trap_music.controller;
 
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -11,14 +12,16 @@ import com.razorpay.Order;
 import com.razorpay.RazorpayClient;
 import com.razorpay.RazorpayException;
 import com.razorpay.Utils;
-import com.trap_music.entities.Users;
-import com.trap_music.services.UsersService;
+import com.trap_music.entity.User;
+import com.trap_music.service.UserService;
 
 import jakarta.servlet.http.HttpSession;
 
-
 @RestController
-public class PaymentController {
+public class SubscriptionController {
+
+    @Autowired
+    private UserService userService;
 
     @PostMapping("/createOrder")
     @ResponseBody
@@ -28,7 +31,7 @@ public class PaymentController {
             RazorpayClient razorpay = new RazorpayClient("rzp_test_bFLRfwc71TUtp7", "Qbl3K7HL7JVB4VRSrJFlacyo");
 
             JSONObject orderRequest = new JSONObject();
-            orderRequest.put("amount", 500);
+            orderRequest.put("amount", 500); // Example amount, modify as needed
             orderRequest.put("currency", "INR");
             orderRequest.put("receipt", "receipt#1");
             JSONObject notes = new JSONObject();
@@ -39,7 +42,7 @@ public class PaymentController {
         } catch (Exception e) {
             System.out.println("Exception while creating order");
         }
-        return order.toString();
+        return order != null ? order.toString() : "";
     }
 
     @PostMapping("/verify")
@@ -47,13 +50,9 @@ public class PaymentController {
     public boolean verifyPayment(@RequestParam String orderId, @RequestParam String paymentId,
             @RequestParam String signature) {
         try {
-            // Initialize Razorpay client with your API key and secret
             RazorpayClient razorpayClient = new RazorpayClient("rzp_test_bFLRfwc71TUtp7", "Qbl3K7HL7JVB4VRSrJFlacyo");
 
-            // Create a signature verification data string
             String verificationData = orderId + "|" + paymentId;
-
-            // Use Razorpay's utility function to verify the signature
             boolean isValidSignature = Utils.verifySignature(verificationData, signature, "Qbl3K7HL7JVB4VRSrJFlacyo");
 
             return isValidSignature;
@@ -63,21 +62,21 @@ public class PaymentController {
         }
     }
 
-    // payment-success -> update to premium user
-    // Assuming you have a UsersService to handle user-related operations
     @GetMapping("/payment-success")
-    public String paymentSuccess(HttpSession session, UsersService userService) {
+    public String paymentSuccess(HttpSession session) {
         String email = (String) session.getAttribute("email");
-        Users user = userService.getUser(email);
-        user.setPremiumAccount(true);
-        userService.updateUser(user);
-        return "login"; // Redirect to login page or any other page as needed
+        User user = userService.getUser(email);
+        if (user != null) {
+            user.setPremiumAccount(true);
+            userService.updateUser(user);
+            return "redirect:/customerhomepage"; // Redirect to customer homepage or any other page as needed
+        } else {
+            return "redirect:/login"; // Redirect to login page if user not found
+        }
     }
 
-    // payment-failure -> redirect to login
     @GetMapping("/payment-failure")
     public String paymentFailure() {
-        // Redirect to login page or any other page as needed
-        return "login";
+        return "redirect:/login"; // Redirect to login page on payment failure
     }
 }

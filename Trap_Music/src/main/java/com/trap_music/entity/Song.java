@@ -1,4 +1,4 @@
-package com.trap_music.entities;
+package com.trap_music.entity;
 
 import java.util.List;
 
@@ -9,33 +9,34 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 
 @Entity
-public class Songs {
-    @Id
+public class Song {
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Long id;
+    public int id;
     public String name;
     public String artist;
     public String genre;
     public String link;
     
-    @ManyToMany(mappedBy = "songs")
-    public List<Playlist> playlist;
-	public Songs() {
+    @ManyToMany
+	List<Playlist> playlist;
+	public Song() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Songs(Long id, String name, String artist, String genre, String link) {
+	public Song(int id, String name, String artist, String genre, String link, List<Playlist> playlist) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.artist = artist;
 		this.genre = genre;
 		this.link = link;
+		this.playlist = playlist;
 	}
-	public Long getId() {
+	public int getId() {
 		return id;
 	}
-	public void setId(Long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	public String getName() {
@@ -62,11 +63,17 @@ public class Songs {
 	public void setLink(String link) {
 		this.link = link;
 	}
+	public List<Playlist> getPlaylist() {
+		return playlist;
+	}
+	public void setPlaylist(List<Playlist> playlist) {
+		this.playlist = playlist;
+	}
 	@Override
 	public String toString() {
-		return "Songs [id=" + id + ", name=" + name + ", artist=" + artist + ", genre=" + genre + ", link=" + link
-				+ "]";
+		return "Song [id=" + id + ", name=" + name + ", artist=" + artist + ", genre=" + genre + ", link=" + link
+				+ ", playlist=" + playlist + "]";
 	}
 	
-   
+    
 }
