@@ -5,15 +5,18 @@ import java.util.List;
 import com.trap_music.entity.Song;
 
 public interface SongService {
-	String addSongs(Song song);
 
-    boolean songExists(String name);
+	boolean songExists(String name);
 
-    List<Song> fetchAllSongs();
+	void addSong(Song song);
 
-    void updateSong(Song song);
+	List<Song> fetchAllSongs();
 
-    List<Song> searchSongs(String keyword);
+	List<Song> searchSongs(String keyword);
+	
+	void toggleFavorite(int songId, int userId);
 
-   
+	void updateSong(Song song);
+
+	
 }

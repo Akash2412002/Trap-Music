@@ -1,9 +1,12 @@
 package com.trap_music.entity;
 
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 
 @Entity
 public class User {
@@ -16,12 +19,15 @@ public class User {
     public String gender;
     public String role;
     public boolean premiumAccount;
+    
+    @ManyToMany
+    public List<Song> favorites;
 	public User() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public User(int id, String name, String email, String password, String gender, String role,
-			boolean premiumAccount) {
+	public User(int id, String name, String email, String password, String gender, String role, boolean premiumAccount,
+			List<Song> favorites) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -30,6 +36,7 @@ public class User {
 		this.gender = gender;
 		this.role = role;
 		this.premiumAccount = premiumAccount;
+		this.favorites = favorites;
 	}
 	public int getId() {
 		return id;
@@ -73,11 +80,16 @@ public class User {
 	public void setPremiumAccount(boolean premiumAccount) {
 		this.premiumAccount = premiumAccount;
 	}
+	public List<Song> getFavorites() {
+		return favorites;
+	}
+	public void setFavorites(List<Song> favorites) {
+		this.favorites = favorites;
+	}
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", name=" + name + ", email=" + email + ", password=" + password + ", gender="
-				+ gender + ", role=" + role + ", premiumAccount=" + premiumAccount + "]";
+				+ gender + ", role=" + role + ", premiumAccount=" + premiumAccount + ", favorites=" + favorites + "]";
 	}
-    
-    
+
 }

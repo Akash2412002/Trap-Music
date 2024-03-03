@@ -3,28 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>View Songs</title>
+    <title>Search Results</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
-        <h1>View Songs</h1>
-        <!-- Search Form -->
-        <form class="mb-3" th:action="@{/songs/search}" method="get">
-            <div class="input-group">
-                <input type="text" class="form-control" placeholder="Search songs..." name="keyword">
-                <button class="btn btn-outline-secondary" type="submit">
-                    <i class="bi bi-search"></i>
-                </button>
-            </div>
-        </form>
-        <!-- View Favorites Button -->
-        <a th:href="@{/songs/favorites}" class="btn btn-primary mb-3">View Favorited Songs</a>
-        
+        <h1>Search Results</h1>
         <table class="table">
             <thead>
                 <tr>
@@ -33,12 +20,11 @@
                     <th scope="col">Artist</th>
                     <th scope="col">Genre</th>
                     <th scope="col">Play</th>
-                    <th scope="col">Favorite</th>
                 </tr>
             </thead>
             <tbody>
                 <!-- Dynamic content with Thymeleaf -->
-                <tr th:each="song : ${songslist}">
+                <tr th:each="song : ${searchResults}">
                     <td th:text="${song.id}"></td>
                     <td th:text="${song.name}"></td>
                     <td th:text="${song.artist}"></td>
@@ -48,16 +34,9 @@
                             <source th:src="${song.link}" type="audio/mpeg"></source>
                         </audio>
                     </td>
-                    <td>
-                        <!-- Check if song is favorited -->
-                        <button type="button" class="btn btn-outline-primary favorite-button" data-song-id="${song.id}">
-                            <i id="heartIcon_${song.id}" class="bi bi-heart"></i>
-                        </button>
-                    </td>
                 </tr>
             </tbody>
         </table>
     </div>
-<script src="/js/trap.js"></script>
 </body>
 </html>

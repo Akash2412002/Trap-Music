@@ -1,0 +1,49 @@
+@charset "UTF-8";
+
+/* Custom CSS for Login Page */
+
+body {
+    background-color: #27213c; /* Background color specified */
+    color: white; /* Text color */
+}
+
+.container {
+    margin-top: 50px;
+    text-align: center;
+}
+
+h1 {
+    margin-bottom: 30px;
+}
+
+.form-label {
+    color: white; /* Label color */
+}
+
+.form-control {
+    background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white background for input fields */
+    color: #27213c; /* Text color for input fields */
+}
+
+.btn-primary {
+    background-color: #3498db; /* Primary button color */
+    border-color: #3498db; /* Primary button border color */
+    font-weight: bold;
+}
+
+.btn-primary:hover {
+    background-color: #2691d9; /* Button color on hover */
+    border-color: #2691d9; /* Button border color on hover */
+}
+
+p {
+    color: white; /* Text color for paragraph */
+}
+
+a {
+    color: #3498db; /* Link color */
+}
+
+a:hover {
+    color: #2691d9; /* Link color on hover */
+}

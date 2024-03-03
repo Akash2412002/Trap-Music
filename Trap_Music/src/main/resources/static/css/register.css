@@ -1,0 +1,40 @@
+@charset "UTF-8";
+
+body {
+    background-color: #27213c; /* Background color specified */
+}
+
+.container {
+    margin-top: 50px;
+}
+
+form {
+    background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white background */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.5); /* Shadow effect */
+}
+
+form h2 {
+    margin-bottom: 20px;
+    color: #27213c; /* Text color */
+}
+
+label {
+    font-weight: bold;
+}
+
+.btn-primary {
+    background-color: #3498db; /* Primary button color */
+    border-color: #3498db; /* Primary button border color */
+    font-weight: bold;
+}
+
+.btn-primary:hover {
+    background-color: #2691d9; /* Button color on hover */
+    border-color: #2691d9; /* Button border color on hover */
+}
+
+input[type="radio"] {
+    margin-right: 5px;
+}

@@ -1,0 +1,42 @@
+@charset "UTF-8";
+
+
+body {
+    background-color: #27213c; 
+    color: white; 
+}
+
+.container {
+    margin-top: 50px;
+    text-align: center;
+}
+
+h1 {
+    margin-bottom: 20px;
+}
+
+p {
+    margin-bottom: 30px;
+}
+
+.btn-primary {
+    background-color: #3498db; 
+    border-color: #3498db; 
+    font-weight: bold;
+}
+
+.btn-primary:hover {
+    background-color: #2691d9; 
+    border-color: #2691d9; 
+}
+
+.btn-success {
+    background-color: #28a745; 
+    border-color: #28a745; 
+    font-weight: bold;
+}
+
+.btn-success:hover {
+    background-color: #218838; 
+    border-color: #218838; 
+}

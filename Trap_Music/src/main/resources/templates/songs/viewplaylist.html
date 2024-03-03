@@ -1,36 +1,45 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>View Playlists</title>
-    <link href="admin.css" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    <table border>
-        <thead>
-            <tr>
-                <th>Playlist ID</th>
-                <th>Playlist Name</th>
-                <th>Playlist Songs</th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- Dynamic content with Thymeleaf -->
-            <tr th:each="playlist : ${plist}">
-                <td th:text="${playlist.id}"></td>
-                <td th:text="${playlist.name}"></td>
-                <td>
-                    <ul>
-                        <li th:each="song : ${playlist.songs}">
-                            <span th:text="${song.name}"></span>
-                            <audio controls>
-                                <source th:src="${song.link}" type="audio/mpeg"></source>
-                            </audio>
-                        </li>
-                    </ul>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="container">
+        <h1>View Playlists</h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Playlist Name</th>
+                    <th>Songs</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Iterate over the playlists -->
+                <tr th:each="playlist : ${playlists}">
+                    <td th:text="${playlist.id}"></td>
+                    <td th:text="${playlist.name}"></td>
+                    <td>
+                        <!-- Iterate over the songs in the playlist -->
+                        <ul>
+                            <li th:each="song : ${playlist.songs}">
+                                <!-- Display song name -->
+                                <span th:text="${song.name}"></span>
+                                
+                                <!-- Audio controls for the song -->
+                                <audio controls>
+                                    <source th:src="${song.link}" type="audio/mpeg">
+                                </audio>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </body>
 </html>

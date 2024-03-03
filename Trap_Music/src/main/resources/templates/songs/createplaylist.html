@@ -1,21 +1,42 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Playlist</title>
-    <link href="admin.css" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    <form action="/createplaylist" method="post">
-        <label>Playlist Name:</label>
-        <input type="text" name="name">
-        <br/>
-        <!-- Assuming dynamic content rendering with Thymeleaf -->
-        <div th:each="song : ${songslist}">
-            <input type="checkbox" th:name="songs" th:value="${song.id}">
-            <label th:text="${song.name}"></label>
-        </div>
-        <input type="submit" value="CREATE PLAYLIST">
-    </form>
+    <div class="container">
+        <h1>Create Playlist</h1>
+        <form action="/songs/addplaylist" method="post" onsubmit="return validateForm()">
+            <div class="mb-3">
+                <label for="name" class="form-label">Playlist Name</label>
+                <input type="text" class="form-control" id="name" name="name" required>
+            </div>
+            <div class="mb-3">
+                <label for="songs" class="form-label">Select Songs</label>
+                <!-- Iterate over the available songs -->
+                <div th:each="song : ${songslist}" >
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" th:id="${'song-' + song.id}" th:name="songs" th:value="${song.id}" >
+                        <label class="form-check-label" th:for="${'song-' + song.id}" th:text="${song.name}" ></label>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Create Playlist</button>
+        </form>
+    </div>
+    <script>
+        function validateForm() {
+            var checkboxes = document.querySelectorAll('input[type="checkbox"][name="songs"]:checked');
+            if (checkboxes.length < 2) {
+                alert("Please select at least two song.");
+                return false;
+            }
+            return true;
+        }
+    </script>
 </body>
 </html>

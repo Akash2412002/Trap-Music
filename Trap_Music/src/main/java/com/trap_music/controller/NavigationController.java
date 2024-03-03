@@ -37,12 +37,7 @@ public class NavigationController {
 	    public String addSongs() {
 	        return "/songs/addsongs";
 	    }
-
-	    @GetMapping("/songs/createplaylist")
-	    public String createPlaylist() {
-	        return "/songs/createplaylist";
-	    }
-
+	    
 
 	    @GetMapping("/auth/subscription")
 	    public String payment() {

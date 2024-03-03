@@ -2,7 +2,6 @@ package com.trap_music.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,14 +17,14 @@ import jakarta.servlet.http.HttpSession;
 public class AuthenticationController {
 
     @Autowired
-    private UserService userService;
+    public UserService userService;
 
     @PostMapping("/register")
     public String registerUser(@ModelAttribute User user, HttpSession session) {
         boolean userExists = userService.emailExists(user.getEmail());
         if (!userExists) {
             userService.addUser(user);
-            session.setAttribute("email", user.getEmail());
+            session.setAttribute("user", user); // Store the entire user object in the session
             return "redirect:login"; // Redirect to the login page after successful registration
         } else {
             // Redirect to login page with error message if user already exists
@@ -37,7 +36,8 @@ public class AuthenticationController {
     @PostMapping("/login")
     public String loginUser(@RequestParam String email, @RequestParam String password, HttpSession session) {
         if (userService.validateUser(email, password)) {
-            session.setAttribute("email", email);
+            User user = userService.getUser(email); // Retrieve the entire user object
+            session.setAttribute("user", user); // Store the entire user object in the session
             if (userService.getRole(email).equals("admin")) {
                 return "redirect:/auth/adminhomepage";
             } else {
@@ -45,8 +45,7 @@ public class AuthenticationController {
             }
         } else {
             // Redirect to login page with error message if authentication fails
-            return "redirect:/login?error=/authentication failed";
+            return "redirect:/auth/login?error=/authentication failed";
         }
     }
-  
 }

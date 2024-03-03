@@ -9,10 +9,8 @@ import com.trap_music.entity.Song;
 
 public interface SongRepository extends JpaRepository<Song, Integer> {
 
-	boolean existsByName(String name);
+	Song findByName(String name);
 
 	List<Song> findByNameContainingIgnoreCaseOrArtistContainingIgnoreCase(String keyword, String keyword2);
-
-	
 
 }

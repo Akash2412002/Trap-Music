@@ -3,57 +3,55 @@ package com.trap_music.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import com.trap_music.entity.Playlist;
 import com.trap_music.entity.Song;
 import com.trap_music.service.PlaylistService;
 import com.trap_music.service.SongService;
 
-@RestController
-@RequestMapping("/playlist")
-public class PlaylistController {
+@RequestMapping("/songs")
+@Controller
+public class PlaylistController 
+{
+	@Autowired
+	PlaylistService playlistService;
+	
+	@Autowired
+	SongService songService;
+	
+	@GetMapping("/createplaylist")
+	public String createPlayList(Model model) {
+		List<Song> songslist=songService.fetchAllSongs(); //Fetching the songs using song service
+		model.addAttribute("songslist",songslist); //Adding the songs in the model
+		return "songs/createplaylist"; //sending createplaylist
+	}
+	
+	@PostMapping("/addplaylist")
+	public String addPlaylist(@ModelAttribute Playlist playlist) {
+	    // Add the playlist to the database using the playlist service
+	    playlistService.addPlaylist(playlist);
+	    List<Song> songs = playlist.getSongs();
+	    for (Song song : songs) {
+	        song.getPlaylist().add(playlist); // Add the playlist to the song's playlist collection
+	        songService.updateSong(song); // Update the song in the database
+	    }
+	    return "redirect:/songs/viewplaylist"; // Redirect to the viewPlaylists page
+	}
 
-    @Autowired
-    public PlaylistService playlistService;
-    
-    @Autowired
-    public SongService songService;
+	
+	@GetMapping("/viewplaylist")
+	public String viewPlaylists(Model model) {
+	    List<Playlist> playlists = playlistService.fetchPlaylists(); // Fetch all playlists from the database
+	    model.addAttribute("playlists", playlists); // Add playlists to the model
+	    return "songs/viewplaylist"; // Return the viewplaylist.html page
+	}
 
-    // Get all playlists
-    @GetMapping("/viewplaylist")
-    public List<Playlist> getAllPlaylist() {
-        return playlistService.getAllPlaylist();
-    }
-
-    // Create a new playlist
-    @PostMapping("/createplaylist")
-    public void createPlaylist(@RequestBody Playlist playlist) {
-        playlistService.createPlaylist(playlist);
-    }
-
-    // Add songs to an existing playlist
-    @PostMapping("/{playlistId}/add-songs")
-    public void addSongsToPlaylist(@PathVariable int playlistId, @RequestBody List<Song> songs) {
-        Playlist playlist = playlistService.getPlaylistById(playlistId);
-        if (playlist != null) {
-            for (Song song : songs) {
-                song.getPlaylist().add(playlist);
-                songService.updateSong(song);
-            }
-        }
-    }
-
-    // Delete a playlist by ID
-    @DeleteMapping("/{playlistId}")
-    public void deletePlaylist(@PathVariable int playlistId) {
-        playlistService.deletePlaylist(playlistId);
-    }
+	
 }
 
