@@ -15,33 +15,32 @@ public class NavigationController {
 
 	    @GetMapping("/auth/register")
 	    public String register() {
-	        return "/auth/register";
+	        return "auth/register";
 	    }
 
 	    @GetMapping("/auth/login")
 	    public String login() {
-	        return "/auth/login";
+	        return "auth/login";
 	    }
 
 	    @GetMapping("/auth/adminhomepage")
 	    public String adminHomepage() {
-	        return "/auth/adminhomepage";
+	        return "auth/adminhomepage";
 	    }
 
 	    @GetMapping("/auth/customerhomepage")
 	    public String customerHomepage() {
-	        return "/auth/customerhomepage";
+	        return "auth/customerhomepage";
 	    }
 	    
 	    @GetMapping("/songs/addsongs")
 	    public String addSongs() {
-	        return "/songs/addsongs";
+	        return "songs/addsongs";
 	    }
-	    
 
 	    @GetMapping("/auth/subscriptionpage")
 	    public String payment() {
-	        return "/auth/subscriptionpage";
+	        return "auth/subscriptionpage";
 	    }
 	    
 	    @GetMapping("/logout")

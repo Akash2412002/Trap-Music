@@ -41,9 +41,3 @@ h2{
   margin-top: 20px;
 }
 
-/* Responsive styles for small screens */
-@media (max-width: 576px) {
-  .form {
-      padding: 0 20px;
-  }
-}

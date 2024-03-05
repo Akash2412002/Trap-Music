@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.razorpay.Order;
 import com.razorpay.RazorpayClient;
@@ -31,7 +32,7 @@ public class SubscriptionController {
             RazorpayClient razorpay = new RazorpayClient("rzp_test_bFLRfwc71TUtp7", "Qbl3K7HL7JVB4VRSrJFlacyo");
 
             JSONObject orderRequest = new JSONObject();
-            orderRequest.put("amount", 500); // Example amount, modify as needed
+            orderRequest.put("amount", 50000); // Example amount -- 50000 paise
             orderRequest.put("currency", "INR");
             orderRequest.put("receipt", "receipt#1");
             JSONObject notes = new JSONObject();
@@ -42,7 +43,7 @@ public class SubscriptionController {
         } catch (Exception e) {
             System.out.println("Exception while creating order");
         }
-        return order != null ? order.toString() : "";
+        return order.toString();
     }
 
     @PostMapping("/verify")
@@ -50,9 +51,14 @@ public class SubscriptionController {
     public boolean verifyPayment(@RequestParam String orderId, @RequestParam String paymentId,
             @RequestParam String signature) {
         try {
+        	// Initialize Razorpay client with your API key and secret
+	        @SuppressWarnings("unused")
             RazorpayClient razorpayClient = new RazorpayClient("rzp_test_bFLRfwc71TUtp7", "Qbl3K7HL7JVB4VRSrJFlacyo");
-
+	        
+	        // Create a signature verification data string
             String verificationData = orderId + "|" + paymentId;
+            
+            // Use Razorpay's utility function to verify the signature
             boolean isValidSignature = Utils.verifySignature(verificationData, signature, "Qbl3K7HL7JVB4VRSrJFlacyo");
 
             return isValidSignature;
@@ -62,21 +68,19 @@ public class SubscriptionController {
         }
     }
 
-    @GetMapping("/payment-success")
-    public String paymentSuccess(HttpSession session) {
+    @GetMapping("/auth/payment-success")
+    public ModelAndView paymentSuccess(HttpSession session) {
+        ModelAndView modelAndView = new ModelAndView();
         String email = (String) session.getAttribute("email");
         User user = userService.getUser(email);
         if (user != null) {
             user.setPremiumAccount(true);
             userService.updateUser(user);
-            return "redirect:/customerhomepage"; // Redirect to customer homepage or any other page as needed
+            modelAndView.setViewName("redirect:/auth/customerhomepage");
         } else {
-            return "redirect:/login"; // Redirect to login page if user not found
+            // If user is not found, redirect to login page
+            modelAndView.setViewName("redirect:/auth/login");
         }
-    }
-
-    @GetMapping("/payment-failure")
-    public String paymentFailure() {
-        return "redirect:/login"; // Redirect to login page on payment failure
+        return modelAndView;
     }
 }

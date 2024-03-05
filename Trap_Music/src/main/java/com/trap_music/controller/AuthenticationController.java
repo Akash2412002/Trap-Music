@@ -42,7 +42,7 @@ public class AuthenticationController {
     public String loginUser(@RequestParam String email, @RequestParam String password, HttpSession session) {
         if (userService.validateUser(email, password)) {
             User user = userService.getUser(email); // Retrieve the entire user object
-            session.setAttribute("user", user); // Store the entire user object in the session
+            session.setAttribute("email", email); // Store the entire user object in the session
             if (userService.getRole(email).equals("admin")) {
                 return "redirect:adminhomepage";
             } else if (user.isPremiumAccount()) {
