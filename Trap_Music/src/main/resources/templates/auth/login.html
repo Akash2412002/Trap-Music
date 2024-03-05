@@ -11,19 +11,21 @@
 </head>
 <body>
     <div class="container">
-        <h1>Login to Trap Music</h1>
-        <form action="/auth/login" method="post">
-            <div class="mb-3">
-                <label for="email" class="form-label">Email</label>
-                <input type="email" class="form-control" id="email" name="email" required>
+        <form action="/auth/login" method="post" class="text-center">
+            <h2>Login to Trap Music</h2>
+            <div class="mb-3 input-field">
+                <label for="email" class="form-label">Email:</label>
+                <input type="email" name="email" id="email" required>
             </div>
-            <div class="mb-3">
-                <label for="password" class="form-label">Password</label>
-                <input type="password" class="form-control" id="password" name="password" required>
+            <div class="mb-3 input-field">
+                <label for="password" class="form-label">Password:</label>
+                <input type="password" name="password" id="password" required>
             </div>
-            <button type="submit" class="btn btn-primary">Login</button>
-            <p>Don't have an account? <a href="/auth/register">Register here</a></p>
+            <button type="submit" class="btn btn-primary button">Login</button>
+            <br><br>
+            <p> Don't have an account? <a href="/auth/register">Register here</a></p>
         </form>
+    </div>
     </div>
 </body>
 </html>

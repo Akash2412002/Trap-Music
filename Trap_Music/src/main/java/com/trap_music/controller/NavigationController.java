@@ -32,16 +32,16 @@ public class NavigationController {
 	    public String customerHomepage() {
 	        return "/auth/customerhomepage";
 	    }
-
+	    
 	    @GetMapping("/songs/addsongs")
 	    public String addSongs() {
 	        return "/songs/addsongs";
 	    }
 	    
 
-	    @GetMapping("/auth/subscription")
+	    @GetMapping("/auth/subscriptionpage")
 	    public String payment() {
-	        return "/auth/subscription";
+	        return "/auth/subscriptionpage";
 	    }
 	    
 	    @GetMapping("/logout")

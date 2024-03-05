@@ -34,8 +34,7 @@ public class PlaylistController
 	
 	@PostMapping("/addplaylist")
 	public String addPlaylist(@ModelAttribute Playlist playlist) {
-	    // Add the playlist to the database using the playlist service
-	    playlistService.addPlaylist(playlist);
+	    playlistService.addPlaylist(playlist);	// Add the playlist to the database using the playlist service
 	    List<Song> songs = playlist.getSongs();
 	    for (Song song : songs) {
 	        song.getPlaylist().add(playlist); // Add the playlist to the song's playlist collection

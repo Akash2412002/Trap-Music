@@ -1,0 +1,174 @@
+/* ==========================Font========================== */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(45deg, #ffaf00, #bb02ff);
+}
+
+h1{
+  color: #fff;
+  margin-top:2rem;
+}
+
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 15px 0;
+  background: linear-gradient(45deg, #ffaf00, #bb02ff);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.logo {
+  color:#fff;
+  font-size: 30px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  align-items: center;
+}
+
+.nav-links form {
+  margin-right: 10px;
+}
+
+.nav-links input[type="text"] {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+  font-size: 16px;
+}
+
+
+input[type="text"]::placeholder {
+  color: #999;
+}
+
+.nav-links .search-button {
+  background-color: #ffaf00;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.nav-links .search-button:hover {
+  background-color: #0033cc;
+}
+
+.nav-links form button[type="submit"] {
+  background-color: #ffaf00;
+  color: #fff;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 15px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.nav-links form button[type="submit"]:hover {
+  background-color: #0033cc;
+}
+
+.container {
+  position: relative;
+  width: 1150px;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 3rem;
+}
+
+.container h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.table {
+  width: 100%;
+  margin-top: 20px;
+  border-collapse: collapse;
+}
+
+.table th,
+.table td {
+  padding: 10px;
+  border: 1px solid #ccc;
+  text-align: center;
+}
+
+.table th {
+  background-color: #bb02ff;
+  color: #fff;
+}
+
+.table tbody tr {
+  background-color: #f2f2f2;
+}
+
+.table tbody tr:hover {
+  background-color: #ddd;
+}
+
+.favorite-button .fa-heart {
+  color: #ccc;
+}
+
+.favorite-button.favorited .fa-heart {
+  color: #bb02ff;
+}
+
+.favorite-button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.favorite-button:hover {
+  color: #bb02ff;
+}
+
+.favorite-button .bi-heart {
+  color: #ccc;
+}
+
+.favorite-button.favorited .bi-heart {
+  color: #bb02ff;
+}
+
+/* =======================Responsive Breakpoint ========================== */
+
+/* Media Query for smaller screens */
+@media screen and (max-width: 768px) {
+  .nav .nav-links {
+    display: none;
+  }
+
+  .nav .search-box {
+    display: block;
+  }
+}

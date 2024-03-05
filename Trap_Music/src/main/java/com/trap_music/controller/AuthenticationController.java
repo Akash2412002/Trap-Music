@@ -1,5 +1,6 @@
 package com.trap_music.controller;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -8,16 +9,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.trap_music.entity.User;
+import com.trap_music.service.SongService;
 import com.trap_music.service.UserService;
 
 import jakarta.servlet.http.HttpSession;
 
-@Controller
 @RequestMapping("/auth")
+@Controller
 public class AuthenticationController {
 
     @Autowired
     public UserService userService;
+    
+    @Autowired
+    public SongService songService;
 
     @PostMapping("/register")
     public String registerUser(@ModelAttribute User user, HttpSession session) {
@@ -39,13 +44,17 @@ public class AuthenticationController {
             User user = userService.getUser(email); // Retrieve the entire user object
             session.setAttribute("user", user); // Store the entire user object in the session
             if (userService.getRole(email).equals("admin")) {
-                return "redirect:/auth/adminhomepage";
+                return "redirect:adminhomepage";
+            } else if (user.isPremiumAccount()) {
+                return "redirect:customerhomepage";
             } else {
-                return "redirect:/auth/customerhomepage";
+                return "redirect:subscriptionpage";
             }
         } else {
             // Redirect to login page with error message if authentication fails
-            return "redirect:/auth/login?error=/authentication failed";
+            return "redirect:login?error=authentication failed";
         }
     }
+
+
 }

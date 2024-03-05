@@ -41,14 +41,13 @@ public class SongController {
             return "redirect:/auth/adminhomepage";
         }
     }
-
+    
     @GetMapping("/viewsongs")
     public String viewSongs(Model model) {
         List<Song> songslist = songService.fetchAllSongs();
         model.addAttribute("songslist", songslist);
         return "songs/viewsongs";
     }
-    
     
     @GetMapping("/search")
     public String searchSongs(@RequestParam(name = "keyword", required = false) String keyword, Model model) {
@@ -58,6 +57,7 @@ public class SongController {
         }
         return "songs/searchresults";
     }
+    
     
     @PostMapping("/togglefavorite")
     public String toggleFavorite(@RequestParam("songId") int songId, HttpSession session) {
