@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.trap_music.entity.Song;
-import com.trap_music.entity.User;
 import com.trap_music.repository.SongRepository;
 import com.trap_music.repository.UserRepository;
 
@@ -39,33 +38,23 @@ public class SongServiceImpl implements SongService{
 	@Override
 	public List<Song> searchSongs(String keyword) {
 		return songRepository.findByNameContainingIgnoreCaseOrArtistContainingIgnoreCase(keyword, keyword);
-	}
-
+	}	
+	
 	@Override
-    public void toggleFavorite(int songId, int userId) {
-        Song song = songRepository.findById(songId)
-                                  .orElseThrow(() -> new RuntimeException("Song not found with id: " + songId));
-
-        List<User> favorites = song.getUsers();
-        User user = new User();
-        user.setId(userId);
-
-        if (favorites.contains(user)) {
-            favorites.remove(user);
-        } else {
-            favorites.add(user);
-        }
-
-        song.setUsers(favorites);
-        songRepository.save(song);
+    public void deleteSong(int songId) {
+        songRepository.deleteById(songId);
     }
 
 	@Override
 	public void updateSong(Song song) {
-		 songRepository.save(song);
-		
+		songRepository.save(song);	
 	}
-
 	
+
+	@Override
+    public Song getSong(int songId) {
+        Optional<Song> songOptional = songRepository.findById(songId);
+        return songOptional.orElse(null);
+    }
  
 }

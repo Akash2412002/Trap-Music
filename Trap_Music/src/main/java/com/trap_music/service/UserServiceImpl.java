@@ -1,19 +1,22 @@
 package com.trap_music.service;
 
-import java.util.ArrayList;
-import java.util.List;
+
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.trap_music.entity.Song;
 import com.trap_music.entity.User;
+import com.trap_music.repository.SongRepository;
 import com.trap_music.repository.UserRepository;
 
 @Service
 public class UserServiceImpl implements UserService{
 	 	@Autowired
 	    public UserRepository userRepository;
+	 	
+	 	@Autowired
+		public SongRepository songRepository;
 
 	    @Override
 	    public String addUser(User user) {
@@ -47,14 +50,12 @@ public class UserServiceImpl implements UserService{
 	    public void updateUser(User user) {
 	        userRepository.save(user);
 	    }
-
-		@Override
-		public List<Song> getFavoriteSongs(User user) {
-		    List<Song> favoriteSongs = new ArrayList<>();
-		    if (user != null && user.getFavorites() != null) {
-		        favoriteSongs.addAll(user.getFavorites());
-		    }
-		    return favoriteSongs;
-		}
+	   
+	   
+	    @Override
+	    public User getUser(int userId) {
+	        Optional<User> userOptional = userRepository.findById(userId);
+	        return userOptional.orElse(null);
+	    }
 
 }

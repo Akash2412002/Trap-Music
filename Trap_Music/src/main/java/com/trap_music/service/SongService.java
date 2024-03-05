@@ -13,10 +13,11 @@ public interface SongService {
 	List<Song> fetchAllSongs();
 
 	List<Song> searchSongs(String keyword);
-	
-	void toggleFavorite(int songId, int userId);
+
+	void deleteSong(int songId);
 
 	void updateSong(Song song);
 
+	Song getSong(int songId);
 	
 }

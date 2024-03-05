@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.trap_music.entity.Playlist;
-import com.trap_music.entity.Song;
 import com.trap_music.repository.PlaylistRepository;
 
 @Service
@@ -25,5 +24,8 @@ public class PlaylistServiceImpl implements PlaylistService {
 		return playlistRepository.findAll();
 	}
 
-	    
+	@Override
+    public void deletePlaylist(int playlistId) {
+        playlistRepository.deleteById(playlistId);
+    }   
 }

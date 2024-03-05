@@ -1,8 +1,5 @@
 package com.trap_music.service;
 
-import java.util.List;
-
-import com.trap_music.entity.Song;
 import com.trap_music.entity.User;
 
 public interface UserService {
@@ -18,6 +15,6 @@ public String addUser(User user);
 
 	public void updateUser(User user);
 
-	public List<Song> getFavoriteSongs(User user);
+	public User getUser(int userId);
 
 }

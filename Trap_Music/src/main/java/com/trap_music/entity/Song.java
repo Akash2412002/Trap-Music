@@ -17,18 +17,19 @@ public class Song {
     public String artist;
     public String genre;
     public String link;
-    public boolean favorite;
     
-    @ManyToMany(mappedBy = "favorites")
+    @ManyToMany(mappedBy = "favoriteSongs")
     public List<User> users;
     
-    @ManyToMany
+    @ManyToMany(mappedBy = "songs")
 	List<Playlist> playlist;
+    
 	public Song() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Song(int id, String name, String artist, String genre, String link, boolean favorite, List<User> users,
+
+	public Song(int id, String name, String artist, String genre, String link, List<User> users,
 			List<Playlist> playlist) {
 		super();
 		this.id = id;
@@ -36,63 +37,70 @@ public class Song {
 		this.artist = artist;
 		this.genre = genre;
 		this.link = link;
-		this.favorite = favorite;
 		this.users = users;
 		this.playlist = playlist;
 	}
+
 	public int getId() {
 		return id;
 	}
+
 	public void setId(int id) {
 		this.id = id;
 	}
+
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
+
 	public String getArtist() {
 		return artist;
 	}
+
 	public void setArtist(String artist) {
 		this.artist = artist;
 	}
+
 	public String getGenre() {
 		return genre;
 	}
+
 	public void setGenre(String genre) {
 		this.genre = genre;
 	}
+
 	public String getLink() {
 		return link;
 	}
+
 	public void setLink(String link) {
 		this.link = link;
 	}
-	public boolean isFavorite() {
-		return favorite;
-	}
-	public void setFavorite(boolean favorite) {
-		this.favorite = favorite;
-	}
+
 	public List<User> getUsers() {
 		return users;
 	}
+
 	public void setUsers(List<User> users) {
 		this.users = users;
 	}
+
 	public List<Playlist> getPlaylist() {
 		return playlist;
 	}
+
 	public void setPlaylist(List<Playlist> playlist) {
 		this.playlist = playlist;
 	}
+
 	@Override
 	public String toString() {
 		return "Song [id=" + id + ", name=" + name + ", artist=" + artist + ", genre=" + genre + ", link=" + link
-				+ ", favorite=" + favorite + ", users=" + users + ", playlist=" + playlist + "]";
-	}
-	
+				+ ", users=" + users + ", playlist=" + playlist + "]";
+	}	
 	
 }
