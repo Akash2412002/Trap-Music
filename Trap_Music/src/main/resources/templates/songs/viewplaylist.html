@@ -23,13 +23,10 @@
                     <td th:text="${playlist.id}"></td>
                     <td th:text="${playlist.name}"></td>
                     <td>
-                        <!-- Iterate over the songs in the playlist -->
                         <ul>
                             <li th:each="song : ${playlist.songs}">
                                 <!-- Display song name -->
                                 <span th:text="${song.name}"></span>
-                                
-                                <!-- Audio controls for the song -->
                                 <audio controls>
                                     <source th:src="${song.link}" type="audio/mpeg">
                                 </audio>

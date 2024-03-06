@@ -67,7 +67,7 @@ h2 {
 }
 
 .button:hover {
-  background-color: #ffaf00; /* Hover background color */
+  background-color: #ffaf00;
 }
 
 p {
@@ -75,7 +75,7 @@ p {
 }
 
 a {
-  color: #007bff; /* Link color */
+  color: #007bff;
   text-decoration: none;
 }
 

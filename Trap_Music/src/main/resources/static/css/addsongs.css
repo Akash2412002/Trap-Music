@@ -99,10 +99,12 @@ input[type="text"]::placeholder {
 h1 {
   text-align: center;
   margin-bottom: 20px;
+  color: #007896;
 }
 
 .form-label {
   font-weight: bold;
+  color: #007896;
 }
 
 .form-control {
@@ -118,7 +120,7 @@ h1 {
   display: block;
   width: 100%;
   padding: 10px;
-  background-color: #007bff;
+  background-color: #007896;
   color: #fff;
   border: none;
   border-radius: 5px;
@@ -127,5 +129,5 @@ h1 {
 }
 
 .btn-primary:hover {
-  background-color: #0056b3;
+  background-color: #ffaf00;
 }
