@@ -13,7 +13,7 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: linear-gradient(45deg, #ffaf00, #bb02ff);
+  background: linear-gradient(45deg,#007896, #46D93C);
 }
 
 h1{
@@ -26,7 +26,7 @@ h1{
   left: 0;
   width: 100%;
   padding: 15px 0;
-  background: linear-gradient(45deg, #ffaf00, #bb02ff);
+  background: linear-gradient(45deg,#007896, #46D93C);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   display: flex;
   justify-content: space-around;
@@ -62,7 +62,7 @@ h1{
 }
 
 .nav-links .nav-button:hover {
-  background-color: #0033cc;
+  background-color: #118009ab;
 }
 
 
@@ -96,7 +96,7 @@ h1{
 }
 
 .table th {
-  background-color: #bb02ff;
+  background-color:  #ffaf00;
   color: #fff;
 }
 

@@ -89,7 +89,7 @@ input[type="text"]::placeholder {
 .container {
   position: relative;
   width: 1150px;
-  padding: 20px;
+  padding: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -99,10 +99,10 @@ input[type="text"]::placeholder {
 
 .container .card {
   position: relative;
-  width: 300px;
-  height: 420px;
+  width: 260px;
+  height: 370px;
   background-color: #fff;
-  margin: 20px;
+  margin: 10px;
   border-radius: 20px;
   overflow: hidden;
   box-shadow: 0 15px 25px rgba(0, 0, 0, .2);
@@ -183,16 +183,21 @@ input[type="text"]::placeholder {
 
 .container .card:nth-child(1) .circle,
 .container .card:nth-child(1) .content a {
-  background: #ffaf00;
+  background: #d93c3c;
 }
 
 .container .card:nth-child(2) .circle,
 .container .card:nth-child(2) .content a {
-  background: #118009de;
+  background: #ffaf00;
 }
 
 .container .card:nth-child(3) .circle,
 .container .card:nth-child(3) .content a {
+  background: #118009de;
+}
+
+.container .card:nth-child(4) .circle,
+.container .card:nth-child(4) .content a {
   background: #0033cc;
 }
 
