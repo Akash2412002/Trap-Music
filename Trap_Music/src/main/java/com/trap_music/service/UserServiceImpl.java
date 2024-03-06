@@ -58,4 +58,15 @@ public class UserServiceImpl implements UserService{
 	        return userOptional.orElse(null);
 	    }
 
+		@Override
+		public boolean updatePassword(String email, String newPassword) {
+			User user = userRepository.findByEmail(email);
+		    if (user != null) {
+		        user.setPassword(newPassword);
+		        userRepository.save(user);
+		        return true;
+		    } else {
+		      return false;
+		    }
+		}
 }

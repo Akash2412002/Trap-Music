@@ -23,6 +23,11 @@ public class NavigationController {
 	        return "auth/login";
 	    }
 
+	    @GetMapping("/auth/forgotpassword")
+	    public String updatePassword() {
+	        return "auth/updatepassword";
+	    }
+	    
 	    @GetMapping("/auth/adminhomepage")
 	    public String adminHomepage() {
 	        return "auth/adminhomepage";

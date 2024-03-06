@@ -3,6 +3,7 @@ package com.trap_music.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -43,6 +44,7 @@ public class AuthenticationController {
         if (userService.validateUser(email, password)) {
             User user = userService.getUser(email); // Retrieve the entire user object
             session.setAttribute("email", email); // Store the entire user object in the session
+            session.setAttribute("user", user); // Store the user object in the session
             if (userService.getRole(email).equals("admin")) {
                 return "redirect:adminhomepage";
             } else if (user.isPremiumAccount()) {
@@ -56,5 +58,16 @@ public class AuthenticationController {
         }
     }
 
-
+    @PostMapping("/updatepassword")
+    public String updatePassword(@RequestParam("email") String email,@RequestParam("password") String newPassword,@RequestParam("confirm-password") String confirmPassword,Model model) {
+        // Validate if the new password matches the confirmation
+        if (!newPassword.equals(confirmPassword)) {
+            model.addAttribute("error", "Passwords do not match");
+            return "auth/updatepassword"; // Return to the update password form with an error message
+        }
+        userService.updatePassword(email, newPassword);
+        // Redirect to a success page or login page after updating the password
+        return "auth/login";
+    }
+    
 }

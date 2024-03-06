@@ -86,6 +86,23 @@ input[type="text"]::placeholder {
   background-color: #118009ab;
 }
 
+.greeting {
+  position: absolute;
+  top: 17%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.greeting h2 {
+  color: #ffae00f6;
+  margin: 0;
+}
+
+.greeting h2 span {
+  color: #fffffff4;
+}
+
 .container {
   position: relative;
   width: 1150px;

@@ -9,22 +9,25 @@
 <body>
 
 <!-- Navigation Bar-->
-<nav class="nav">
-    <a href="#" class="logo">Trap Music</a>
-    <ul class="nav-links">
-        <form th:action="@{/songs/search}" method="get">
-            <input type="text" placeholder="Search songs..." name="keyword">
-            <button class="search-button" type="submit">
-                <i class="bi bi-search"></i> <span>Search</span>
-            </button>
-        </form>
-        <form action="/logout" method="get">
-            <button type="submit">Logout</button>
-        </form>
-    </ul>
-</nav>
-
-<div class="container">
+	<nav class="nav">
+	    <a href="#" class="logo">Trap Music</a>
+	    <ul class="nav-links">
+	        <form th:action="@{/songs/search}" method="get">
+	            <input type="text" placeholder="Search songs..." name="keyword">
+	            <button class="search-button" type="submit">
+	                <i class="bi bi-search"></i> <span>Search</span>
+	            </button>
+	        </form>
+	        <form action="/logout" method="get">
+	            <button type="submit">Logout</button>
+	        </form>
+	    </ul>
+	</nav>
+	<!-- Greeting -->
+	<div class="greeting">
+	    <h2>Welcome, <span th:text="${session.user?.name}"></span></h2>
+	</div>
+	<div class="container">
     <div class="card">
         <div class="circle">
             <h2>01</h2>
