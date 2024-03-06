@@ -18,7 +18,7 @@ public class Song {
     public String genre;
     public String link;
     
-    @ManyToMany(mappedBy = "favoriteSongs")
+    @ManyToMany
     public List<User> users;
     
     @ManyToMany(mappedBy = "songs")

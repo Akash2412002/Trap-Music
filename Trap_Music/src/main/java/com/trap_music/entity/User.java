@@ -23,15 +23,6 @@ public class User {
     public String role;
     public boolean premiumAccount;
     
-    @ManyToMany
-    @JoinTable(
-        name = "user_favorite_songs",
-        joinColumns = @JoinColumn(name = "user_id"),
-        inverseJoinColumns = @JoinColumn(name = "song_id")
-    )
-    
-    public List<Song> favoriteSongs = new ArrayList<>();
-    
     
 	public User() {
 		super();
@@ -39,8 +30,8 @@ public class User {
 	}
 
 
-	public User(int id, String name, String email, String password, String gender, String role, boolean premiumAccount,
-			List<Song> favoriteSongs) {
+	public User(int id, String name, String email, String password, String gender, String role,
+			boolean premiumAccount) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -49,7 +40,6 @@ public class User {
 		this.gender = gender;
 		this.role = role;
 		this.premiumAccount = premiumAccount;
-		this.favoriteSongs = favoriteSongs;
 	}
 
 
@@ -123,21 +113,11 @@ public class User {
 	}
 
 
-	public List<Song> getFavoriteSongs() {
-		return favoriteSongs;
-	}
-
-
-	public void setFavoriteSongs(List<Song> favoriteSongs) {
-		this.favoriteSongs = favoriteSongs;
-	}
-
-
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", name=" + name + ", email=" + email + ", password=" + password + ", gender="
-				+ gender + ", role=" + role + ", premiumAccount=" + premiumAccount + ", favoriteSongs=" + favoriteSongs
-				+ "]";
+				+ gender + ", role=" + role + ", premiumAccount=" + premiumAccount + "]";
 	}
-	
+
+
 }
