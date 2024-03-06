@@ -16,6 +16,9 @@ body {
   background: linear-gradient(45deg,#007896, #46D93C);
 }
 
+h1{
+	color:#fff;
+}
 
 .nav {
   position: fixed;

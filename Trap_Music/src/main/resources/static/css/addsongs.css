@@ -86,37 +86,46 @@ input[type="text"]::placeholder {
   background-color: #118009ab;
 }
 
-h1{
-    color:  #ffae00f6;
-    font-size: 5em;
-    text-align: center;
-    padding: 3rem 5px;
-}
-h1 span{
-    color: #fffffff4;
-}
-p{
-    color: #ffffffc7;
-    text-align: center;
-    padding-top: 20px;
-    max-width: 47%;
-    margin: 0 auto; 
-    display: block;
-    font-size: small;
+
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.button-center {
-    background-color: #5b21d7; 
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    padding: 15px 25px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin: 0 auto; 
-    display: block;
-  }
-  
-.button-center:hover {
-    background-color: #ffaf00; /* Hover background color */
-  }
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.form-label {
+  font-weight: bold;
+}
+
+.form-control {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.btn-primary {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+}
