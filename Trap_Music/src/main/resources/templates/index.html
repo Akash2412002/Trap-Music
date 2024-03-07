@@ -5,18 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome to Trap Music - By Akash</title>
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="css/welcome.css">
+    <link rel="stylesheet" href="/css/welcome.css">
 </head>
 <body>
 	<!-- Navigation Bar-->
 	<nav class="nav">
-	    <a href="#" class="logo">Trap Music</a>
+	    <a href="/" class="logo">Trap Music</a>
 	    <ul class="nav-links">
-	        <form th:action="@{/songs/search}" method="get">
-	            <input type="text" placeholder="Search songs..." name="keyword">
-	            <button class="search-button" type="submit">
-	                <i class="bi bi-search"></i> <span>Search</span>
-	            </button>
+	    	<a href="/auth/about-us">
+    		<button  class="about-contact-button" type="button">About Us</button></a>
+	        <a href="https://akash2412002.github.io/Akash-Portfolio/" target="_blank">
+    		<button  class="about-contact-button" type="button">Contact Us</button></a>
 	        </form>
 	        <form action="/auth/login" method="get">
 	            <button type="submit">Sign In</button>

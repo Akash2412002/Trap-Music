@@ -48,6 +48,11 @@ public class NavigationController {
 	        return "auth/subscriptionpage";
 	    }
 	    
+	    @GetMapping("auth/about-us")
+	    public String aboutUs() {
+	        return "auth/about-us";
+	    }
+	    
 	    @GetMapping("/logout")
 	    public String logoutUser(HttpSession session) {
 	        session.invalidate(); // Invalidate session on logout

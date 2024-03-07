@@ -48,6 +48,22 @@ body {
   margin-right: 10px;
 }
 
+.nav-links .contact-button {
+  background-color: #ffaf00;
+  color: #fff;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 15px;
+  cursor: pointer;
+  margin-right: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.nav-links .contact-button:hover {
+  background-color: #118009ab;
+}
+
 .nav-links form button[type="submit"] {
   background-color: #ffaf00;
   color: #fff;
@@ -64,43 +80,36 @@ body {
 }
 
 h1{
-  color: #fff;
-  margin-top:6rem;
-  text-align: center;
+    color:  #ffaf00;
+    font-size: 3em;
+    text-align: center;
+    padding:5px;
+}
+h1 span{
+    color: #fffffff4;
+}
+p{
+    color: #ffffffc7;
+    text-align: center;
+    padding-top: 20px;
+    max-width: 60%;
+    margin: 0 auto; 
+    display: block;
+    font-size: medium;
 }
 
-.table {
-  width: 100%;
-  margin-top: 20px;
-  border-collapse: collapse;
-}
-
-.table th,
-.table td {
-  padding: 25px;
-  border: 1px solid #ccc;
-  text-align: center;
-}
-
-.table th {
-  background-color: #ffaf00;
-  color: #fff;
-}
-
-.table tbody tr {
-  background-color: #f2f2f2;
-}
-
-.table tbody tr:hover {
-  background-color: #ddd;
-}
-
-/* Remove bullet points from unordered list */
-ul {
-  list-style-type: none;
-}
-
-ul li {
-  display: flex;
-  align-items: center;
-}
+.button-center {
+    background-color: #5b21d7; 
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 15px 25px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 0 auto; 
+    display: block;
+  }
+  
+.button-center:hover {
+    background-color: #ffaf00; /* Hover background color */
+  }

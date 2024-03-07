@@ -12,14 +12,20 @@
         <h1>Explore Songs</h1>
         <!-- Navigation Bar-->
         <nav class="nav">
-            <a href="#" class="logo">Trap Music</a>
+            <a href="/" class="logo">Trap Music</a>
             <ul class="nav-links">
                 <form th:action="@{/songs/search}" method="get">
                     <input type="text" placeholder="Search songs..." name="keyword">
                     <button class="search-button" type="submit">
                         <i class="bi bi-search"></i> <span>Search</span>
                     </button>
-                </form>
+                	</form>
+                	<form action="/songs/createplaylist" method="get">
+	            	<button type="submit">Create Playlist</button>
+	        		</form>
+	        <form action="/songs/viewplaylist" method="get">
+	            <button type="submit">View Playlist</button>
+	        </form>
                 <form action="/logout" method="get">
                     <button type="submit">Logout</button>
                 </form>

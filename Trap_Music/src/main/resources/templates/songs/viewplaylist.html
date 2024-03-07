@@ -7,6 +7,18 @@
     <link rel="stylesheet" href="/css/viewplaylist.css">
 </head>
 <body>
+	<!-- Navigation Bar-->
+	<nav class="nav">
+	    <a href="/" class="logo">Trap Music</a>
+	    <ul class="nav-links">
+	        <form action="/songs/viewsongs" method="get">
+	            <button type="submit">View Songs</button>
+	        </form>
+	        <form action="/songs/createplaylist" method="get">
+	            <button type="submit">Create Playlist</button>
+	        </form>
+	    </ul>
+	</nav>
     <div class="container">
         <h1>Explore your Playlists</h1>
         <table class="table">
