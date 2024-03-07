@@ -25,4 +25,28 @@
         </form>
     </div>
 </body>
+<script>
+//Event listener to the login form submission
+document.getElementById('loginForm').addEventListener('submit', function(event) {
+    event.preventDefault(); 		// Prevent default form submission(Prevent Auto Submission)
+    var formData = new FormData(this);			//store the form data
+    fetch('/auth/login', {
+        method: 'POST',
+        body: formData		// Set the form data as the request body
+    })
+    .then(response => response.json())		// response body as JSON
+    .then(data => {
+        if (data.success) {
+            alert('Login successful');
+            window.location.href = data.redirectUrl;
+        } else {
+            alert('Login failed: ' + data.message);
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Error occurred while logging in. Please try again later.');
+    });
+});
+</script>
 </html>

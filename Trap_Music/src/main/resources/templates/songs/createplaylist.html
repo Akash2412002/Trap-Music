@@ -41,11 +41,12 @@
     </div>
     <script>
         function validateForm() {
-            var checkboxes = document.querySelectorAll('input[type="checkbox"][name="songs"]:checked');
+            var checkboxes = document.querySelectorAll('input[type="checkbox"][name="songs"]:checked'); 		 // will Select all checked checkboxes with the name - songs
             if (checkboxes.length < 2) {
                 alert("Please select at least two song.");
                 return false;
             }
+            alert("Playlist created successfully.");
             return true;
         }
     </script>
