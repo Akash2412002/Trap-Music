@@ -24,31 +24,5 @@
             <p><a href="/auth/forgotpassword">Forgot Password?</p>
         </form>
     </div>
-<script>
-document.getElementById('loginForm').addEventListener('submit', function(event) {
-    event.preventDefault(); // Prevent default form submission
-    var formData = new FormData(this);
-    fetch('/auth/login', {
-        method: 'POST',
-        body: formData
-    })
-    .then(() => {
-        // Check if the URL has changed after the redirect
-        if (window.location.pathname === '/auth/login') {
-            // If the user is still on the login page, the login attempt failed
-            alert('Login failed. Please check your credentials and try again.');
-        } else {
-            // If the user is redirected, the login attempt was successful
-            // You can handle successful login behavior here if needed
-        }
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        alert('Error occurred while logging in. Please try again later.');
-    });
-});
-
-
-</script>
 </body>
 </html>
