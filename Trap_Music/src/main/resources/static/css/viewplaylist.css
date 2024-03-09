@@ -95,12 +95,27 @@ h1{
   background-color: #ddd;
 }
 
-/* Remove bullet points from unordered list */
-ul {
-  list-style-type: none;
+.delete-button {
+    background-color: transparent;
+    border: none; 
+    padding: 0;
+    cursor: pointer;
 }
 
-ul li {
-  display: flex;
-  align-items: center;
+.delete-button:hover {
+    color: #cc0000;
 }
+
+.delete-button i {
+    font-size: 24px;
+}
+
+.nested-table td,.nested-table th {
+    border: none;
+    text-align:left;
+}
+
+.nested-table td {
+    padding: 8px 8px 8px 18px;
+}
+

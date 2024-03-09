@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>View Playlists</title>
     <link rel="stylesheet" href="/css/viewplaylist.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
 	<!-- Navigation Bar-->
@@ -23,28 +24,38 @@
         <h1>Explore your Playlists</h1>
         <table class="table">
             <thead>
-                <tr>
-                    <th>ID</th>
+                <tr>  
                     <th>Playlist Name</th>
-                    <th>Songs</th>
+                    <th>Song</th>
+                    <th>Delete</th>
                 </tr>
             </thead>
             <tbody>
                 <!-- Iterate over the playlists -->
                 <tr th:each="playlist : ${playlists}">
-                    <td th:text="${playlist.id}"></td>
                     <td th:text="${playlist.name}"></td>
                     <td>
-                        <ul>
-                            <li th:each="song : ${playlist.songs}">
-                                <!-- Display song name -->
-                                <span th:text="${song.name}"></span>
-                                <audio controls>
-                                    <source th:src="${song.link}" type="audio/mpeg">
-                                </audio>
-                            </li>
-                        </ul>
+                        <table class="nested-table" > <!-- Nested table for displaying songs -->
+                            <tbody>
+                                <!-- Iterate over songs in the playlist -->
+                                <tr th:each="song : ${playlist.songs}">
+                                    <!-- Display song name in a separate column -->
+                                    <td th:text="${song.name}" ></td>
+                                    <!-- Display audio player for the song -->
+                                    <td>
+                                        <audio controls>
+                                            <source th:src="${song.link}" type="audio/mpeg">
+                                        </audio>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </td>
+                    <td>
+					    <form th:action="@{/songs/deleteplaylist(playlistId=${playlist.id})}" method="post">
+					        <button type="submit" class="delete-button"><i class="fa fa-trash"></i></button>
+					    </form>
+					</td>
                 </tr>
             </tbody>
         </table>
