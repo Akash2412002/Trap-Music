@@ -1,5 +1,6 @@
 package com.trap_music.controller;
 
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -52,6 +53,7 @@ public class NavigationController {
 	    public String aboutUs() {
 	        return "auth/about-us";
 	    }
+	    
 	    
 	    @GetMapping("/logout")
 	    public String logoutUser(HttpSession session) {
