@@ -14,10 +14,12 @@ public interface SongService {
 
 	List<Song> searchSongs(String keyword);
 
-	void deleteSong(int songId);
-
 	void updateSong(Song song);
 
-	Song getSong(int songId);
+	Song getSongById(int songId);
+	
+	List<Song> getFavoriteSongs();
+	
+    void resetFavorites();
 	
 }

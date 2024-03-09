@@ -135,32 +135,21 @@ input[type="text"]::placeholder {
   background-color: #ddd;
 }
 
-.favorite-button .fa-heart {
-  color: #ccc;
+.favorite-btn {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
 }
 
-.favorite-button.favorited .fa-heart {
-  color: #bb02ff;
+.favorite-btn:hover .fas {
+    color: red;
 }
 
-.favorite-button {
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  transition: color 0.3s ease;
+.red-heart {
+    color: red;
 }
 
-.favorite-button:hover {
-  color: #bb02ff;
-}
-
-.favorite-button .bi-heart {
-  color: #ccc;
-}
-
-.favorite-button.favorited .bi-heart {
-  color: #bb02ff;
-}
 
 /* =======================Responsive Breakpoint ========================== */
 

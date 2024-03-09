@@ -1,5 +1,6 @@
 package com.trap_music.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.Entity;
@@ -17,27 +18,33 @@ public class Song {
     public String artist;
     public String genre;
     public String link;
+    public boolean favorite;
     
     @ManyToMany
     public List<User> users;
     
+    @ManyToMany(mappedBy = "favoriteSongs")
+    public List<User> favoritedBy = new ArrayList<>();
+    
     @ManyToMany(mappedBy = "songs")
-	List<Playlist> playlist;
+   	List<Playlist> playlist;
     
 	public Song() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Song(int id, String name, String artist, String genre, String link, List<User> users,
-			List<Playlist> playlist) {
+	public Song(int id, String name, String artist, String genre, String link, boolean favorite, List<User> users,
+			List<User> favoritedBy, List<Playlist> playlist) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.artist = artist;
 		this.genre = genre;
 		this.link = link;
+		this.favorite = favorite;
 		this.users = users;
+		this.favoritedBy = favoritedBy;
 		this.playlist = playlist;
 	}
 
@@ -81,12 +88,28 @@ public class Song {
 		this.link = link;
 	}
 
+	public boolean isFavorite() {
+		return favorite;
+	}
+
+	public void setFavorite(boolean favorite) {
+		this.favorite = favorite;
+	}
+
 	public List<User> getUsers() {
 		return users;
 	}
 
 	public void setUsers(List<User> users) {
 		this.users = users;
+	}
+
+	public List<User> getFavoritedBy() {
+		return favoritedBy;
+	}
+
+	public void setFavoritedBy(List<User> favoritedBy) {
+		this.favoritedBy = favoritedBy;
 	}
 
 	public List<Playlist> getPlaylist() {
@@ -100,7 +123,8 @@ public class Song {
 	@Override
 	public String toString() {
 		return "Song [id=" + id + ", name=" + name + ", artist=" + artist + ", genre=" + genre + ", link=" + link
-				+ ", users=" + users + ", playlist=" + playlist + "]";
-	}	
-	
+				+ ", favorite=" + favorite + ", users=" + users + ", favoritedBy=" + favoritedBy + ", playlist="
+				+ playlist + "]";
+	}
+
 }

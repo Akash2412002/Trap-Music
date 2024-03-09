@@ -20,12 +20,15 @@
                         <i class="bi bi-search"></i> <span>Search</span>
                     </button>
                 	</form>
+                	<form action="/songs/favorites" method="get">
+			            <button type="submit">View Favorites</button>
+			        </form>
                 	<form action="/songs/createplaylist" method="get">
-	            	<button type="submit">Create Playlist</button>
+	            		<button type="submit">Create Playlist</button>
 	        		</form>
-	        <form action="/songs/viewplaylist" method="get">
-	            <button type="submit">View Playlist</button>
-	        </form>
+			        <form action="/songs/viewplaylist" method="get">
+			            <button type="submit">View Playlist</button>
+			        </form>
                 <form action="/logout" method="get">
                     <button type="submit">Logout</button>
                 </form>
@@ -55,14 +58,45 @@
                         </audio>
                     </td>
                     <td>
-                        <!-- Check if song is favorited -->
-                        <button type="button" class="btn btn-outline-primary favorite-button" data-song-id="${song.id}">
-                            <i class="far fa-heart fa-lg"></i>
-                        </button>                        
-                    </td>
+					     <button type="button" class="favorite-btn" data-song-id="${song.id}" th:data-song-id="${song.id}">
+					            <i class="fas fa-heart"></i>
+					     </button>                   
+					</td>                 
                 </tr>
             </tbody>
         </table>
     </div>
 </body>
+<!-- Script to handle favorite and unfavorite actions -->
+	<script>
+	 document.addEventListener("DOMContentLoaded", function () {
+	        // Get all heart-shaped buttons
+	        const favoriteButtons = document.querySelectorAll(".favorite-btn");
+	        
+	        // Add click event listener to each heart-shaped button
+	        favoriteButtons.forEach(function (button) {
+	            button.addEventListener("click", function () {
+	                // Toggle class to change heart color
+	                this.querySelector("i").classList.toggle("red-heart");
+	                
+	                // Get song ID from data attribute
+	                const songId = this.getAttribute("data-song-id");
+	                console.log("Fetch URL:", "/songs/markfavorite?songId=" + songId);
+	                // Send a request to mark the song as favorite
+	                fetch("/songs/markfavorite?songId=" + songId)
+	                    .then(response => {
+	                        if (response.ok) {
+	                            // Show alert message
+	                            alert("Song added to favorites");
+	                        } else {
+	                            console.error('Failed to mark song as favorite');
+	                        }
+	                    })
+	                    .catch(error => {
+	                        console.error('Error:', error);
+	                    });
+	            });
+	        });
+	    });
+	</script>
 </html>

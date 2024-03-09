@@ -1,8 +1,6 @@
 package com.trap_music.service;
 
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -50,13 +48,7 @@ public class UserServiceImpl implements UserService{
 	    public void updateUser(User user) {
 	        userRepository.save(user);
 	    }
-	   
-	   
-	    @Override
-	    public User getUser(int userId) {
-	        Optional<User> userOptional = userRepository.findById(userId);
-	        return userOptional.orElse(null);
-	    }
+
 
 		@Override
 		public boolean updatePassword(String email, String newPassword) {
@@ -68,5 +60,10 @@ public class UserServiceImpl implements UserService{
 		    } else {
 		      return false;
 		    }
+		}
+
+		@Override
+		public void save(User user) {
+			userRepository.save(user);	
 		}
 }
