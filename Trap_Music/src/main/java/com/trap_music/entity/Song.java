@@ -18,10 +18,6 @@ public class Song {
     public String artist;
     public String genre;
     public String link;
-    public boolean favorite;
-    
-    @ManyToMany
-    public List<User> users;
     
     @ManyToMany(mappedBy = "favoriteSongs")
     public List<User> favoritedBy = new ArrayList<>();
@@ -42,8 +38,6 @@ public class Song {
 		this.artist = artist;
 		this.genre = genre;
 		this.link = link;
-		this.favorite = favorite;
-		this.users = users;
 		this.favoritedBy = favoritedBy;
 		this.playlist = playlist;
 	}
@@ -88,22 +82,6 @@ public class Song {
 		this.link = link;
 	}
 
-	public boolean isFavorite() {
-		return favorite;
-	}
-
-	public void setFavorite(boolean favorite) {
-		this.favorite = favorite;
-	}
-
-	public List<User> getUsers() {
-		return users;
-	}
-
-	public void setUsers(List<User> users) {
-		this.users = users;
-	}
-
 	public List<User> getFavoritedBy() {
 		return favoritedBy;
 	}
@@ -123,8 +101,7 @@ public class Song {
 	@Override
 	public String toString() {
 		return "Song [id=" + id + ", name=" + name + ", artist=" + artist + ", genre=" + genre + ", link=" + link
-				+ ", favorite=" + favorite + ", users=" + users + ", favoritedBy=" + favoritedBy + ", playlist="
-				+ playlist + "]";
+				+ ", favoritedBy=" + favoritedBy + ", playlist=" + playlist + "]";
 	}
 
 }

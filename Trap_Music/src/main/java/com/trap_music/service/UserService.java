@@ -17,6 +17,4 @@ public String addUser(User user);
 
 	public boolean updatePassword(String email, String newPassword);
 
-	public void save(User user);
-
 }

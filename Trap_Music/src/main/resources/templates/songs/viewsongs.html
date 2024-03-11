@@ -69,34 +69,37 @@
 </body>
 <!-- Script to handle favorite and unfavorite actions -->
 	<script>
-	 document.addEventListener("DOMContentLoaded", function () {
-	        // Get all heart-shaped buttons
-	        const favoriteButtons = document.querySelectorAll(".favorite-btn");
-	        
-	        // Add click event listener to each heart-shaped button
-	        favoriteButtons.forEach(function (button) {
-	            button.addEventListener("click", function () {
-	                // Toggle class to change heart color
-	                this.querySelector("i").classList.toggle("red-heart");
-	                
-	                // Get song ID from data attribute
-	                const songId = this.getAttribute("data-song-id");
-	                console.log("Fetch URL:", "/songs/markfavorite?songId=" + songId);
-	                // Send a request to mark the song as favorite
-	                fetch("/songs/markfavorite?songId=" + songId)
-	                    .then(response => {
-	                        if (response.ok) {
-	                            // Show alert message
-	                            alert("Song added to favorites");
-	                        } else {
-	                            console.error('Failed to mark song as favorite');
-	                        }
-	                    })
-	                    .catch(error => {
-	                        console.error('Error:', error);
-	                    });
-	            });
+	document.addEventListener("DOMContentLoaded", function () {
+	    // Get all heart-shaped buttons
+	    const favoriteButtons = document.querySelectorAll(".favorite-btn");
+	    
+	    // Add click event listener to each heart-shaped button
+	    favoriteButtons.forEach(function (button) {
+	        button.addEventListener("click", function () {
+	            // Toggle class to change heart color
+	            this.querySelector("i").classList.toggle("red-heart");
+	            
+	            // Get song ID from data attribute
+	            const songId = this.getAttribute("data-song-id");
+	            console.log("Fetch URL:", "/songs/togglefavorite?songId=" + songId);
+	            // Send a request to toggle favorite status
+	            fetch("/songs/togglefavorite?songId=" + songId)
+	                .then(response => {
+	                    if (response.ok) {
+	                        // Show alert message
+	                        const action = this.querySelector("i").classList.contains("red-heart") ? "added to" : "removed from";
+	                        alert("Song " + action + " favorites");
+	                    } else {
+	                        console.error('Failed to toggle favorite status');
+	                    }
+	                })
+	                .catch(error => {
+	                    console.error('Error:', error);
+	                });
 	        });
 	    });
+	});
+
 	</script>
+	
 </html>

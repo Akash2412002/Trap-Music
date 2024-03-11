@@ -48,7 +48,7 @@ public class UserServiceImpl implements UserService{
 	    public void updateUser(User user) {
 	        userRepository.save(user);
 	    }
-
+	    
 
 		@Override
 		public boolean updatePassword(String email, String newPassword) {
@@ -60,10 +60,5 @@ public class UserServiceImpl implements UserService{
 		    } else {
 		      return false;
 		    }
-		}
-
-		@Override
-		public void save(User user) {
-			userRepository.save(user);	
 		}
 }

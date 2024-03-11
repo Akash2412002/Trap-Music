@@ -18,8 +18,4 @@ public interface SongService {
 
 	Song getSongById(int songId);
 	
-	List<Song> getFavoriteSongs();
-	
-    void resetFavorites();
-	
 }

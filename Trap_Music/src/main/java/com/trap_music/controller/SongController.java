@@ -19,6 +19,7 @@ import com.trap_music.service.SongService;
 import com.trap_music.service.UserService;
 
 import jakarta.servlet.http.HttpSession;
+import jakarta.transaction.Transactional;
 
 @RequestMapping("/songs")
 @Controller
@@ -58,27 +59,46 @@ public class SongController {
         return "songs/searchresults";
     }
     
-    @GetMapping("/markfavorite") 
-    public String markFavorite(@RequestParam("songId") int songId, HttpSession session) {
+    @GetMapping("/togglefavorite") 
+    @Transactional			// This method is executed within a transaction
+    public String toggleFavorite(@RequestParam("songId") int songId, HttpSession session) {
         User user = (User) session.getAttribute("user");
         Song song = songService.getSongById(songId);
+
         if (user != null && song != null) {
-            if (!user.getFavoriteSongs().contains(song)) {
-                user.getFavoriteSongs().add(song);
-                userService.save(user);
+            List<Song> favoriteSongs = user.getFavoriteSongs();
+
+            if (favoriteSongs.contains(song)) {
+                favoriteSongs.remove(song);
+                song.getFavoritedBy().remove(user);
+            } else {
+                favoriteSongs.add(song);
+                song.getFavoritedBy().add(user);
             }
-            return "redirect:/songs/favorites"; // Redirect to favorite songs
+
+            userService.updateUser(user);
+            songService.updateSong(song);
+
+            return "redirect:/songs/favorites";
         } else {
-            return "redirect:/songs/viewsongs"; // If user or song not found
+            return "redirect:/songs/viewsongs";
         }
     }
 
+
+    
     @GetMapping("/favorites")
     public String viewFavorites(Model model, HttpSession session) {
         User user = (User) session.getAttribute("user");
-        List<Song> favorites = user.getFavoriteSongs();
-        model.addAttribute("favorites", favorites);
-        return "songs/favorites"; // Return view for displaying favorite songs
+        if (user != null) {
+            List<Song> favorites = user.getFavoriteSongs();
+            model.addAttribute("favorites", favorites);
+            return "songs/favorites"; // Return view for displaying favorite songs
+        } else {
+            // Handle case when user is not authenticated
+            return "redirect:/auth/login"; // Redirect to login page or display an error message
+        }
     }
+
 
 }
