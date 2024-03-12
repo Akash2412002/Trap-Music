@@ -4,10 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Favorite Songs</title>
+    <link rel="stylesheet" href="/css/viewsongs.css">
 </head>
 <body>
+<!-- Navigation Bar-->
+        <nav class="nav">
+            <a href="/" class="logo">Trap Music</a>
+            <ul class="nav-links">
+			        <form action="/songs/viewsongs" method="get">
+			            <button type="submit">View Songs</button>
+			        </form>
+                <form action="/logout" method="get">
+                    <button type="submit">Logout</button>
+                </form>
+            </ul>
+        </nav>      
     <div class="container">
         <h1>Favorite Songs</h1>
+        <th:block th:if="${#lists.isEmpty(favorites)}">
+            <h1>-No favorite songs found.</h1>
+        </th:block>
+        <th:block th:unless="${#lists.isEmpty(favorites)}">
         <table class="table">
             <thead>
                 <tr>

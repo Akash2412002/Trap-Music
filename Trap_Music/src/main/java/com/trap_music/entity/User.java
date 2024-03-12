@@ -3,6 +3,7 @@ package com.trap_music.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -25,7 +26,7 @@ public class User {
     public String role;
     public boolean premiumAccount;
     
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     public List<Playlist> playlists = new ArrayList<>();
     
     @ManyToMany(fetch = FetchType.EAGER)
@@ -36,7 +37,7 @@ public class User {
 )
             
     public List<Song> favoriteSongs = new ArrayList<>();
-    
+
 	public User() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -134,6 +135,6 @@ public class User {
 				+ gender + ", role=" + role + ", premiumAccount=" + premiumAccount + ", playlists=" + playlists
 				+ ", favoriteSongs=" + favoriteSongs + "]";
 	}
-
+    
 	
 }

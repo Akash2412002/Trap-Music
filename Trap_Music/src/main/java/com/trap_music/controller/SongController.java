@@ -3,7 +3,6 @@ package com.trap_music.controller;
 
 import java.util.List;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,6 +24,7 @@ import jakarta.transaction.Transactional;
 @Controller
 public class SongController {
     
+	
     @Autowired
     public SongService songService;
 
@@ -60,7 +60,6 @@ public class SongController {
     }
     
     @GetMapping("/togglefavorite") 
-    @Transactional			// This method is executed within a transaction
     public String toggleFavorite(@RequestParam("songId") int songId, HttpSession session) {
         User user = (User) session.getAttribute("user");
         Song song = songService.getSongById(songId);
@@ -75,10 +74,8 @@ public class SongController {
                 favoriteSongs.add(song);
                 song.getFavoritedBy().add(user);
             }
-
             userService.updateUser(user);
             songService.updateSong(song);
-
             return "redirect:/songs/favorites";
         } else {
             return "redirect:/songs/viewsongs";

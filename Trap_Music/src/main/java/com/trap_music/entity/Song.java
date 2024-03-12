@@ -30,8 +30,8 @@ public class Song {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Song(int id, String name, String artist, String genre, String link, boolean favorite, List<User> users,
-			List<User> favoritedBy, List<Playlist> playlist) {
+	public Song(int id, String name, String artist, String genre, String link, List<User> favoritedBy,
+			List<Playlist> playlist) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -104,4 +104,5 @@ public class Song {
 				+ ", favoritedBy=" + favoritedBy + ", playlist=" + playlist + "]";
 	}
 
+	
 }
