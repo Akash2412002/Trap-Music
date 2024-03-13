@@ -15,17 +15,17 @@ import jakarta.persistence.ManyToOne;
 @Entity
 public class Playlist {
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)				// Auto-generating id for the playlist
     public int id;
 	
     public String name;
     
-    @ManyToOne // Many playlists can belong to one user
-    @JoinColumn(name = "user_id")
+    @ManyToOne 														// Many playlists can belong to one user
+    @JoinColumn(name = "user_id")									// Mapping the user's id as a foreign key
     public User user;
     
-    @ManyToMany
-    public List<Song> songs = new ArrayList<>();
+    @ManyToMany														// Many-to-many relationship with songs
+    public List<Song> songs = new ArrayList<>();					// List to hold songs in the playlist
     
     
 	public Playlist() {

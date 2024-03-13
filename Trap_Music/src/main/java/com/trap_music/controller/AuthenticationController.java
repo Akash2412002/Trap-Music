@@ -19,7 +19,7 @@ import com.trap_music.service.UserService;
 
 import jakarta.servlet.http.HttpSession;
 
-@RequestMapping("/auth")
+@RequestMapping("/auth")		// Mapping all requests under '/auth' directory to this controller
 @Controller
 public class AuthenticationController {
 
@@ -31,26 +31,24 @@ public class AuthenticationController {
 
     @PostMapping("/register")
     public String registerUser(@ModelAttribute User user, HttpSession session) {
-        boolean userExists = userService.emailExists(user.getEmail());
+        boolean userExists = userService.emailExists(user.getEmail());			// check user already exist or not
         if (!userExists) {
-            userService.addUser(user);
-            session.setAttribute("user", user); // Store the entire user object in the session
-            return "redirect:login"; // Redirect to the login page after successful registration
+            userService.addUser(user);					// Add user if not exist
+            session.setAttribute("user", user); 		// Store the entire user object in the session
+            return "redirect:login"; 					// Redirect to the login page after successful registration
         } else {
-            // Redirect to login page with error message if user already exists
-            return "redirect:login?error=user already exists";
+            return "redirect:login?error=user already exists";					// Redirect to login page with error message if user already exists
         }
     }
 
     @PostMapping("/login")
-    @ResponseBody			//return value should be the response body
+    @ResponseBody													//return value should be the response body
     public ResponseEntity<?> loginUser(@RequestParam String email, @RequestParam String password, HttpSession session) {
         if (userService.validateUser(email, password)) {			// Validates the user's email and password
-            User user = userService.getUser(email);
-            session.setAttribute("email", email);
+            User user = userService.getUser(email);					// Retrieves user information from the database
+            session.setAttribute("email", email);					// Stores user information in the session
             session.setAttribute("user", user);
-            if (userService.getRole(email).equals("admin")) {
-            	
+            if (userService.getRole(email).equals("admin")) { 	
             	//Response alert handled in javascript --> see login html
                 return ResponseEntity.ok().body(Map.of("success", true, "redirectUrl", "/auth/adminhomepage"));			// Returns a success response with redirect URL for admin login
             } else if (user.isPremiumAccount()) {
@@ -69,10 +67,9 @@ public class AuthenticationController {
         // Validate if the new password matches the confirmation
         if (!newPassword.equals(confirmPassword)) {
             model.addAttribute("error", "Passwords do not match");
-            return "auth/updatepassword"; // Return to the update password form with an error message
+            return "auth/updatepassword"; 					// Return to the update password form with an error message
         }
-        userService.updatePassword(email, newPassword);
-        // Redirect to a success page or login page after updating the password
+        userService.updatePassword(email, newPassword);		// Redirect to a success page or login page after updating the password
         return "auth/login";
     }
     

@@ -9,6 +9,6 @@ import com.trap_music.entity.User;
 
 public interface PlaylistRepository extends JpaRepository<Playlist, Integer>{
 
-	List<Playlist> findByUser(User user);
+	List<Playlist> findByUser(User user);		// Method signature to find playlists by associated user
 
 }

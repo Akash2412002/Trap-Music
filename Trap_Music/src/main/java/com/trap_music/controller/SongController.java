@@ -18,42 +18,41 @@ import com.trap_music.service.SongService;
 import com.trap_music.service.UserService;
 
 import jakarta.servlet.http.HttpSession;
-import jakarta.transaction.Transactional;
 
-@RequestMapping("/songs")
+@RequestMapping("/songs")						// Mapping all requests under '/songs' directory to this controller
 @Controller
 public class SongController {
     
 	
-    @Autowired
+    @Autowired									// Autowiring SongService to handle song-related operations
     public SongService songService;
 
-    @Autowired
+    @Autowired									// Autowiring UserService to handle user-related operations
     public UserService userService;
     
     
     @PostMapping("/addsongs")
     public String addSongs(@ModelAttribute Song song, Model model) {
-        boolean status = songService.songExists(song.getName());
+        boolean status = songService.songExists(song.getName());		// Check if the song already exists
         if (!status) {
-            songService.addSong(song);
-            return "redirect:/songs/viewsongs";
+            songService.addSong(song);									// Add the song if it does not exist
+            return "redirect:/songs/viewsongs";							// Redirect to view all songs after adding
         } else {
-            return "redirect:/auth/adminhomepage";
+            return "redirect:/auth/adminhomepage";						// Redirect to admin homepage if the song already exists
         }
     }
     
     @GetMapping("/viewsongs")
     public String viewSongs(Model model) {
-        List<Song> songslist = songService.fetchAllSongs();
-        model.addAttribute("songslist", songslist);
+        List<Song> songslist = songService.fetchAllSongs();				// Fetch all songs from the database
+        model.addAttribute("songslist", songslist);						// Add songs to the model for rendering in the view
         return "songs/viewsongs";
     }
     
     @GetMapping("/search")
     public String searchSongs(@RequestParam(name = "keyword", required = false) String keyword, Model model) {
         if (keyword != null && !keyword.isEmpty()) {
-            List<Song> searchResults = songService.searchSongs(keyword);
+            List<Song> searchResults = songService.searchSongs(keyword);	// Search songs based on the provided keyword
             model.addAttribute("searchResults", searchResults);
         }
         return "songs/searchresults";
@@ -61,20 +60,20 @@ public class SongController {
     
     @GetMapping("/togglefavorite") 
     public String toggleFavorite(@RequestParam("songId") int songId, HttpSession session) {
-        User user = (User) session.getAttribute("user");
-        Song song = songService.getSongById(songId);
+        User user = (User) session.getAttribute("user");					// Retrieve the logged-in user from the session
+        Song song = songService.getSongById(songId);						// Retrieve the song by its ID
 
         if (user != null && song != null) {
-            List<Song> favoriteSongs = user.getFavoriteSongs();
+            List<Song> favoriteSongs = user.getFavoriteSongs();				// Retrieve the list of favorite songs for the user
 
-            if (favoriteSongs.contains(song)) {
+            if (favoriteSongs.contains(song)) {								// Remove the song from favorites if already favorited
                 favoriteSongs.remove(song);
                 song.getFavoritedBy().remove(user);
             } else {
-                favoriteSongs.add(song);
+                favoriteSongs.add(song);									// Add the song to favorites if not favorited
                 song.getFavoritedBy().add(user);
             }
-            userService.updateUser(user);
+            userService.updateUser(user);									// Update user and song entities in the database
             songService.updateSong(song);
             return "redirect:/songs/favorites";
         } else {
@@ -86,14 +85,13 @@ public class SongController {
     
     @GetMapping("/favorites")
     public String viewFavorites(Model model, HttpSession session) {
-        User user = (User) session.getAttribute("user");
+        User user = (User) session.getAttribute("user");					// Retrieve the logged-in user from the session
         if (user != null) {
-            List<Song> favorites = user.getFavoriteSongs();
-            model.addAttribute("favorites", favorites);
-            return "songs/favorites"; // Return view for displaying favorite songs
-        } else {
-            // Handle case when user is not authenticated
-            return "redirect:/auth/login"; // Redirect to login page or display an error message
+            List<Song> favorites = user.getFavoriteSongs();					// Retrieve the list of favorite songs for the user
+            model.addAttribute("favorites", favorites);						// Add favorite songs to the model for rendering in the view
+            return "songs/favorites"; 										// Return view for displaying favorite songs
+        } else {															// Handle case when user is not authenticated
+            return "redirect:/auth/login";
         }
     }
 

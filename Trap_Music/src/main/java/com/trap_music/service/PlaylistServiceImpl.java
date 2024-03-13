@@ -16,19 +16,19 @@ public class PlaylistServiceImpl implements PlaylistService {
 
 	@Override
 	public void addPlaylist(Playlist playlist,User user ) {
-		playlist.setUser(user); 
-		playlistRepository.save(playlist);
+		playlist.setUser(user); 							// Associate the playlist with the provided user
+		playlistRepository.save(playlist);					// Save the playlist to the database
 		
 	}
 
 	@Override
     public void deletePlaylist(int playlistId) {
-        playlistRepository.deleteById(playlistId);
+        playlistRepository.deleteById(playlistId);			// Delete the playlist by its ID
     }
 
 
 	@Override
 	public List<Playlist> fetchPlaylistsByUser(User user) {
-		return playlistRepository.findByUser(user);
+		return playlistRepository.findByUser(user);			// Fetch playlists associated with the provided user
 	}   
 }

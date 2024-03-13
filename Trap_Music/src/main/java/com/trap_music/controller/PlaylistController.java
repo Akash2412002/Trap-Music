@@ -19,7 +19,8 @@ import com.trap_music.service.SongService;
 
 import jakarta.servlet.http.HttpSession;
 
-@RequestMapping("/songs")
+
+@RequestMapping("/songs")					// Mapping all requests under '/songs' directory to this controller
 @Controller
 public class PlaylistController 
 {
@@ -31,24 +32,24 @@ public class PlaylistController
 	
 	@GetMapping("/createplaylist")
 	public String createPlayList(Model model) {
-		List<Song> songslist=songService.fetchAllSongs(); //Fetching the songs using song service
-		model.addAttribute("songslist",songslist); //Adding the songs in the model
-		return "songs/createplaylist"; //sending createplaylist
+		List<Song> songslist=songService.fetchAllSongs(); 			// Fetching all songs using song service
+		model.addAttribute("songslist",songslist); 					// Adding the songs in the model
+		return "songs/createplaylist"; 								// returning createplaylist
 	}
 	
 	@PostMapping("/addplaylist")
 	public String addPlaylist(@ModelAttribute Playlist playlist, HttpSession session) {
 	    User user = (User) session.getAttribute("user");
 	    if (user != null) {
-	        playlist.setUser(user); // Associate the playlist with the logged-in user
-	        playlistService.addPlaylist(playlist, user); // Pass the user object to addPlaylist method
+	        playlist.setUser(user); 								// Associate the playlist with the logged-in user
+	        playlistService.addPlaylist(playlist, user); 			// Pass the user object to addPlaylist method to add the playlist to the database
 	        List<Song> songs = playlist.getSongs();
 	        for (Song song : songs) {
-	            song.getPlaylist().add(playlist); // Add the playlist to the song's playlist collection
-	            songService.updateSong(song); // Update the song in the database
+	            song.getPlaylist().add(playlist); 					// Add the playlist to the song's playlist collection
+	            songService.updateSong(song); 						// Update the song in the database
 	        }
 	    }
-	    return "redirect:/songs/viewplaylist"; // Redirect to the viewPlaylists page
+	    return "redirect:/songs/viewplaylist"; 						// Redirect to the viewPlaylists page
 	}
 
 
@@ -57,7 +58,7 @@ public class PlaylistController
 	public String viewPlaylists(Model model, HttpSession session) {
 	    User user = (User) session.getAttribute("user");
 	    if (user != null) {
-	        List<Playlist> playlists = playlistService.fetchPlaylistsByUser(user);
+	        List<Playlist> playlists = playlistService.fetchPlaylistsByUser(user);		 // Fetch playlists associated with the logged-in user
 	        model.addAttribute("playlists", playlists);
 	    }
 	    return "songs/viewplaylist";
@@ -66,7 +67,7 @@ public class PlaylistController
 
 	@PostMapping("/deleteplaylist")
 	public String deletePlaylist(@RequestParam("playlistId") int playlistId) {
-	    playlistService.deletePlaylist(playlistId);
+	    playlistService.deletePlaylist(playlistId);					// Delete the playlist from the database
 	    return "redirect:/songs/viewplaylist";
 	}
 

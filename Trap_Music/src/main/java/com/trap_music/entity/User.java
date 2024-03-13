@@ -26,14 +26,15 @@ public class User {
     public String role;
     public boolean premiumAccount;
     
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)		// One-to-many relationship mapping with playlists owned by this user
     public List<Playlist> playlists = new ArrayList<>();
     
-    @ManyToMany(fetch = FetchType.EAGER)
+    // Many-to-many relationship mapping with favorite songs
+    @ManyToMany(fetch = FetchType.EAGER)							// Specifies eager loading strategy for loading associated entities eagerly 
     @JoinTable(
-            name = "user_favorite_song",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "song_id")
+            name = "user_favorite_song",							// Name of the join table in the database
+            joinColumns = @JoinColumn(name = "user_id"),			// Column name in the join table that references the user's ID
+            inverseJoinColumns = @JoinColumn(name = "song_id")		// Column name in the join table that references the song's ID
 )
             
     public List<Song> favoriteSongs = new ArrayList<>();

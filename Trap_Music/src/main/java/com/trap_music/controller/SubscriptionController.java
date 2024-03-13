@@ -28,7 +28,7 @@ public class SubscriptionController {
     @ResponseBody
     public String createOrder() {
         Order order = null;
-        try {
+        try {													// My razorpay ID
             RazorpayClient razorpay = new RazorpayClient("rzp_test_bFLRfwc71TUtp7", "Qbl3K7HL7JVB4VRSrJFlacyo");
 
             JSONObject orderRequest = new JSONObject();
@@ -39,7 +39,7 @@ public class SubscriptionController {
             notes.put("notes_key_1", "Tea, Earl Grey, Hot");
             orderRequest.put("notes", notes);
 
-            order = razorpay.orders.create(orderRequest);
+            order = razorpay.orders.create(orderRequest);		  // Create the order using Razorpay API
         } catch (Exception e) {
             System.out.println("Exception while creating order");
         }
@@ -71,16 +71,16 @@ public class SubscriptionController {
     @GetMapping("/auth/payment-success")
     public ModelAndView paymentSuccess(HttpSession session) {
         ModelAndView modelAndView = new ModelAndView();
-        String email = (String) session.getAttribute("email");
-        User user = userService.getUser(email);
+        String email = (String) session.getAttribute("email");		// Retrieve email from session
+        User user = userService.getUser(email);						// Retrieve user from database based on email
         if (user != null) {
-            user.setPremiumAccount(true);
-            userService.updateUser(user);
+            user.setPremiumAccount(true);							// Set user's account as premium
+            userService.updateUser(user);							// Update user's details in the database
             modelAndView.setViewName("redirect:/auth/customerhomepage");
         } else {
             // If user is not found, redirect to login page
             modelAndView.setViewName("redirect:/auth/login");
         }
-        return modelAndView;
+        return modelAndView;										// Pass data between the controller and the view in Spring MVC
     }
 }

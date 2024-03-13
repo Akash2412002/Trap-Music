@@ -19,11 +19,11 @@ public class Song {
     public String genre;
     public String link;
     
-    @ManyToMany(mappedBy = "favoriteSongs")
-    public List<User> favoritedBy = new ArrayList<>();
+    @ManyToMany(mappedBy = "favoriteSongs")					// Mapping the many-to-many relationship with users who have favorited this song
+    public List<User> favoritedBy = new ArrayList<>();		// List to hold users who have favorited this song
     
-    @ManyToMany(mappedBy = "songs")
-   	List<Playlist> playlist;
+    @ManyToMany(mappedBy = "songs")							// Mapping the many-to-many relationship with playlists that include this song
+   	List<Playlist> playlist;								// List to hold playlists containing this song
     
 	public Song() {
 		super();
