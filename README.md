@@ -2,6 +2,7 @@
 Trap Music is a Music Player Application
 
 Live Repo Link : https://github.com/Akash2412002/Trap-Music-Live.git
+
 Demo Viedo Link: https://youtu.be/msH-M0fzD3E?si=oUdhaGvMKGKzjEWW
 
 About the Project:
