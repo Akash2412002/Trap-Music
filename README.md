@@ -8,14 +8,14 @@ Demo Viedo Link: https://youtu.be/msH-M0fzD3E?si=oUdhaGvMKGKzjEWW
 About the Project:
 The Trap Music Player is a web application designed to provide users with a platform to discover, create playlists, and enjoy their favorite trap music tracks. It allows users to register, login, buy premium through Razorpay API, view songs, play songs, create playlists, add songs to playlists, search for songs, making songs favorite and unfavorite.
 
-Tech Stack Used:
-Backend: Java Spring Boot (STS)
-Frontend: Thymeleaf (for server-side rendering) - HTML,CSS,Java Script
-Database: MySQL
-Authentication and Authorization: Spring Security (I disabled it for testing)
-Payment Gateway Integration: Razorpay
-ORM Framework: Hibernate
-Dependency Management: Maven
+_ Tech Stack Used:
+_ Backend: Java Spring Boot (STS)
+_ Frontend: Thymeleaf (for server-side rendering) - HTML,CSS,Java Script
+_ Database: MySQL
+_ Authentication and Authorization: Spring Security (I disabled it for testing)
+_ Payment Gateway Integration: Razorpay
+_ ORM Framework: Hibernate
+_ Dependency Management: Maven
 
 How to Use This Project:
 1. Clone the Repository: git clone https://github.com/Akash2412002/Trap-Music.git
